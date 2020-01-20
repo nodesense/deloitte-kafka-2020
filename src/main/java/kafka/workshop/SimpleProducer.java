@@ -190,7 +190,8 @@ public class SimpleProducer {
                 // producer record, topic, key (null), value (message)
                 // send message, not waiting for ack
                 String key = "Message" + counter ;
-                ProducerRecord record = new ProducerRecord<>(TOPIC, key, counter + " " + message);
+                String value = counter + " " + message;
+                ProducerRecord record = new ProducerRecord<>(TOPIC, key, value);
                 // producer.send(record); // async, non-blocking
                 producer.send(record).get(); // sync, blocking
 
