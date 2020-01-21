@@ -355,12 +355,17 @@ Apache NIFI / Embed the schema inside message
     }}
     {{data}}
 
-Apache Kafka / Doesn't embed schema, instead include schema version number
+Apache Kafka / Doesn't embed schema with message, instead include schema version number
     {{schema-version}} - 4 bytes number
     {{data}}
 
 Where is schema stored?
     Schema registry tool - to store the schemas with version
+    HTTP REST Service running on port 8081
+    
+    Where eactly the schemas are stored?
+    
+    Ans: ZooKeeper
     
 KAFKA for batch? Why?
    Data Pipeline, persisted messages/streams
@@ -390,3 +395,29 @@ you can add  to pom.xml
             <artifactId>avro</artifactId>
             <version>1.9.1</version>
   </dependency>
+  
+  
+  
+SCHEMA REGISTRY/REST API
+
+http://k5.nodesense.ai:8081/
+
+To know all schemas,
+
+http://k5.nodesense.ai:8081/subjects
+
+http://k5.nodesense.ai:8081/subjects/invoices-key/versions
+
+http://k5.nodesense.ai:8081/subjects/invoices-key/versions/1
+
+
+http://k5.nodesense.ai:8081/subjects/invoices-value/versions
+
+http://k5.nodesense.ai:8081/subjects/invoices-value/versions/1
+
+
+    kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic invoices --from-beginning
+    
+To view Avro Formatted data
+    kafka-avro-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic invoices --from-beginning
+
