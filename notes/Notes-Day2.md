@@ -381,3 +381,12 @@ KAFKA for batch? Why?
  Command to generate POJO class from the schema
  
  java -jar ./lib/avro-tools-1.9.1.jar compile schema ./src/main/resources/avro/invoice.avsc ./src/main/java
+
+
+you can add  to pom.xml
+
+  <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.9.1</version>
+  </dependency>
