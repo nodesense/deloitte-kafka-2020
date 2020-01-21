@@ -67,7 +67,13 @@ public class OrderProducer {
 
             ProducerRecord<String, Order> record = new ProducerRecord<>(TOPIC, key, order);
             System.out.println("Sending " + order.orderId);
+
+            // produer.send will invoke serialize method internally
+            // pass topic name and order object parameter
+            // serialize will return bytes as output
+            // bytes shall be send to broker
             producer.send(record);
+
             System.out.printf("order send %s sent\n", record);
             Thread.sleep(5000); // Demo only,
         }

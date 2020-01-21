@@ -49,7 +49,13 @@ public class OrderDeserializer implements Deserializer<Order> {
 
         Order order = null;
         try {
-            System.out.println("Bytes received " +  new String(bytes, StandardCharsets.UTF_8));
+            System.out.println("Received bytes");
+            for (byte b: bytes) {
+                System.out.print(b + " ");
+            }
+            System.out.println();
+
+            // System.out.println("Bytes received " +  new String(bytes, StandardCharsets.UTF_8));
 
             String o = new String(bytes, StandardCharsets.UTF_8).trim();
             System.out.println("Clean data " + o);
