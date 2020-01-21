@@ -158,7 +158,8 @@ public class SimpleProducer {
 
         props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS); // broker address
 
-        props.put(ACKS_CONFIG, "0"); // acknowledge level 0, 1, all *
+        props.put(ACKS_CONFIG, "0"); // acknowledge level "0", "1", "all"
+
         props.put(RETRIES_CONFIG, 2); // how many retry when msg failed to send
 
         // whatever first condition reached,
@@ -185,7 +186,7 @@ public class SimpleProducer {
 
 
         int counter = 0;
-        for (int i = 0 ; i < 1; i++) {
+        for (int i = 0 ; i < 100; i++) {
             for (String message:greetingMessages) {
                 // producer record, topic, key (null), value (message)
                 // send message, not waiting for ack
@@ -196,7 +197,7 @@ public class SimpleProducer {
                 producer.send(record).get(); // sync, blocking
 
                 System.out.printf("Greeting %d - %s sent\n", counter, message);
-                Thread.sleep(1000); // Demo only,
+                Thread.sleep(5000); // Demo only,
                 counter++;
             }
         }

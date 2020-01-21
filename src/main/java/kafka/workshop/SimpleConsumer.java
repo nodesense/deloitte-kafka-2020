@@ -29,8 +29,10 @@ public class SimpleConsumer {
         props.put(GROUP_ID_CONFIG, "greetings-consumer-group"); // offset, etc, TODO
 
         // -- true, automatically commit the offset, automatically
-        props.put(ENABLE_AUTO_COMMIT_CONFIG, "true");
+        // -- false, developers manually commit the offset
+        props.put(ENABLE_AUTO_COMMIT_CONFIG, "false");
         props.put(AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
+
         props.put(SESSION_TIMEOUT_MS_CONFIG, "30000");
 
         // key deserialize the bytes data into String format, JSON,AVRO formats
@@ -76,9 +78,14 @@ public class SimpleConsumer {
                         record.offset());
 
                 System.out.printf("key=%s,value=%s\n", record.key(), record.value());
+
+
+                // manual commit if ENABLE_AUTO_COMMIT_CONFIG is "false"
+                // technically consumer send a message to broker about commited offset against consumer group
+                consumer.commitSync();
             }
 
-            Thread.sleep(2000);
+            // Thread.sleep(2000);
         }
 
     }
