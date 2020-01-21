@@ -19,6 +19,8 @@ public class OrderProducer {
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     public static String TOPIC = "orders";
 
+    public static String countries[] = new String[] {"IN", "USA", "EU", "AU", "DE"};
+
     static Random r = new Random();
 
     static Order nextOrder() {
@@ -26,11 +28,10 @@ public class OrderProducer {
         order.amount = 100.0 + r.nextInt(1000);
         order.orderId = String.valueOf(r.nextInt(1000000));
         order.customerId = String.valueOf(r.nextInt(100));
-        order.country = "IN";
+        order.country = countries[r.nextInt(countries.length)];
 
         return order;
     }
-
 
     public static void main(String[] args) throws  Exception {
         System.out.println("Welcome to producer");
@@ -48,7 +49,7 @@ public class OrderProducer {
         props.put(VALUE_SERIALIZER_CLASS_CONFIG, OrderSerializer.class);
 
         //props.put("partitioner.class", "kafka.workshop.order.OrderPartitioner");
-        // props.put("partitioner.class", OrderPartitioner.class);
+        props.put("partitioner.class", OrderPartitioner.class);
 
 
         // Key as string, value as OrderConfirmation
@@ -71,6 +72,7 @@ public class OrderProducer {
             // produer.send will invoke serialize method internally
             // pass topic name and order object parameter
             // serialize will return bytes as output
+            // producer shall call custom partitioner's partition method to know the partition
             // bytes shall be send to broker
             producer.send(record);
 
