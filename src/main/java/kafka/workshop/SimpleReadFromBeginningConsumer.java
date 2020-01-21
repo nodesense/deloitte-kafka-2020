@@ -16,7 +16,7 @@ import java.util.UUID;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
-public class SimpleConsumer {
+public class SimpleReadFromBeginningConsumer {
     public static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
     public static String TOPIC = "texts";
 
@@ -24,9 +24,6 @@ public class SimpleConsumer {
         Properties props = new Properties();
 
         props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-
-        // Consumer group id, should be unique, partition allocated to consumers inside teh group
-        props.put(GROUP_ID_CONFIG, "greetings-consumer-group"); // offset, etc, TODO
 
         // -- true, automatically commit the offset, automatically
         // -- false, developers manually commit the offset
@@ -42,10 +39,11 @@ public class SimpleConsumer {
 
         props.put(VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 
-        // discussed later
-       //  props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
-       // props.put(ConsumerConfig.CLIENT_ID_CONFIG, "your_client_id");
-       // props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        // Example code, to read from beginning always
+        // Use Random, unique group id
+       props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
+       //props.put(ConsumerConfig.CLIENT_ID_CONFIG, "your_client_id");
+       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         // <Key as string, Value as string>
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);

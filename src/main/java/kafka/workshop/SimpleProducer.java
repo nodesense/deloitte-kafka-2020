@@ -18,8 +18,8 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 public class SimpleProducer {
 
-    public static String BOOTSTRAP_SERVERS = "localhost:9092";
-    public static String TOPIC = "greetings";
+    public static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
+    public static String TOPIC = "texts";
 
 
     public static String[] greetingMessages = new String[] {
@@ -194,9 +194,11 @@ public class SimpleProducer {
                 String value = counter + " " + message;
                 ProducerRecord record = new ProducerRecord<>(TOPIC, key, value);
                 // producer.send(record); // async, non-blocking
-                producer.send(record).get(); // sync, blocking
+                RecordMetadata metadata = (RecordMetadata) producer.send(record).get(); // sync, blocking
 
                 System.out.printf("Greeting %d - %s sent\n", counter, message);
+                System.out.println("Ack offset " + metadata.offset() + " partition " + metadata.partition());
+
                 Thread.sleep(5000); // Demo only,
                 counter++;
             }

@@ -154,4 +154,106 @@ Consumer Group
                  partition-2 - 522 [commited by consumer]
             }
                 
+    Async/Sync
+    
+    Sync - Blocing call, block current thread until it is executed/completed
+    Async - Non-Blocking call, doesn't block the current thread, current thread can continue processing other messages
+            - Async has the callback
+            
+            
+    function Thread/run() {
+       consumeMessage() - 1 sec
+       processMessage() - 5 sec, 
+       commitOffsetAsync(callback) - handled by worker thread - 0 second
+    }
+    
+    workerThread() {
+           commmitOffset() - 2 second
+    }
+    
+CLUSTER SETUP
+  -- 4 Brokers cluster + 1 zookeeper [for demonstration, use the same system with differnt port]
+  -- Broker id 0 - Port 9092, log dir /tmp/kafka-logs
+  -- Broker id 1 - Port 9092, log dir /tmp/kafka-logs-1
+  -- Broker id 2 - Port 9093, log dir /tmp/kafka-logs-2
+  -- Broker id 3 - port 9094, log dir /tmp/kafka-logs-3
+        
+%KAFKA_HOME%/etc/kafka/server.properties [COPY/PASTE this file 3 times]
+%KAFKA_HOME%/etc/kafka/server1.properties
+%KAFKA_HOME%/etc/kafka/server2.properties
+%KAFKA_HOME%/etc/kafka/server3.properties
+
+For Windows
+    This may be already started
+    
+    kafka-server-start.bat %KAFKA_HOME%\etc\kafka\server.properties
+    
+    next command prompt
+        kafka-server-start.bat %KAFKA_HOME%\etc\kafka\server1.properties
+
+    next command prompt
+        kafka-server-start.bat %KAFKA_HOME%\etc\kafka\server2.properties
+
+    next command prompt
+        kafka-server-start.bat %KAFKA_HOME%\etc\kafka\server3.properties
+
+
+
+for mac/linux/unix
+    kafka-server-start $KAFKA_HOME/etc/kafka/server.properties
+    kafka-server-start $KAFKA_HOME/etc/kafka/server1.properties
+    kafka-server-start $KAFKA_HOME/etc/kafka/server2.properties
+    kafka-server-start $KAFKA_HOME/etc/kafka/server3.properties
+
+Check the cluster up and running using ZooKeeper
+
+    open new command prompt
+    
+    zookeeper-shell localhost:2181
+    
+    above shall bring a cli for zookeeper/tree strucutred configuration
+    
+    run below command in zookeeper shell
+    
+    ls /
+    ls /brokers
+    ls /brokers/ids
+    ls /brokers/topics
+    
+CREATE A TOPIC WITH 3 Replications and 3 partitions
+    topic name: texts
+    partitions: 3
+    replications: 3
+    Brokers: 4
+    
+    kafka-topics --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic texts
+    kafka-topics --describe  --zookeeper localhost:2181 --topic texts
+    
+kafka-topics --describe  --zookeeper localhost:2181 --topic texts
+Topic:texts	PartitionCount:3	ReplicationFactor:3	Configs:
+	Topic: texts	Partition: 0	Leader: 0 [Broker-id]	Replicas: 0,2,3 [Broker-ids]	Isr: 0,2,3 [Broker-ids]
+	Topic: texts	Partition: 1	Leader: 1 [Broker-id]	Replicas: 1,3,0	Isr: 1,3,0
+	Topic: texts	Partition: 2	Leader: 2 [Broker-id]	Replicas: 2,0,1	Isr: 2,0,1
+	
+ISR - In Sync Replicas
+    Broker 0 - Lead for PArtition 0 
+                All writes for partition 0 goes to Broker 0
+                Ack is processed here
+    Broker 1 - Lead for parition 1
+               All writes for partition 1 goes to Broker 1
+                Ack is processed here
+    
+    Broker 2 - Lead for parition 2
+               All writes for partition 2 goes to Broker 2
+                Ack is processed here
+                
+Partition 0 - Data for partition 0 kept by Brokers  0,2,3  as replicas
+Partition 1 - Data for partition 1 kept by Brokers  1,3,0  as replicas
+Partition 2 - Data for partition 2 kept by Brokers  2,0,1 as replicas
+
+
+ISR 
+    Leader P0 - writen to its own disk
+    But other replicas are slow, they need time to copy the data
+        Slower replica may not be sync with leader
     
