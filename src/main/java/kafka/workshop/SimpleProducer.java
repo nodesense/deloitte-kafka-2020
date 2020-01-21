@@ -158,7 +158,7 @@ public class SimpleProducer {
 
         props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS); // broker address
 
-        props.put(ACKS_CONFIG, "0"); // acknowledge level "0", "1", "all"
+        props.put(ACKS_CONFIG, "all"); // acknowledge level "0", "1", "all"
 
         props.put(RETRIES_CONFIG, 2); // how many retry when msg failed to send
 
