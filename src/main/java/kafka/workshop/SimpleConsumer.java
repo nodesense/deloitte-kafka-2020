@@ -17,7 +17,7 @@ import java.util.UUID;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class SimpleConsumer {
-    public static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
+    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     public static String TOPIC = "texts";
 
     public static void main(String[] args) throws Exception {

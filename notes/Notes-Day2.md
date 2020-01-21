@@ -257,3 +257,31 @@ ISR
     But other replicas are slow, they need time to copy the data
         Slower replica may not be sync with leader
     
+
+Install putty [ssh]  OR "git for windows"
+
+######
+
+Confluent Kafka on LINUX - Enterprise
+
+confluent start
+confluent status 
+confluent stop 
+
+Kx.nodesense.ai 
+        ZooKeeper - 2181
+        Broker - 9092
+        Schema Registry - 8081
+        Control Center UI - 9021
+        
+Open the browser http://Kx.nodesense.ai:9021
+
+Create a topic using ZooKeeper
+
+
+Below can be executed from windows machine also
+
+    kafka-topics --create --zookeeper k5.nodesense.ai:2181 --replication-factor 1 --partitions 3 --topic texts
+    
+    kafka-topics --describe  --zookeeper k5.nodesense.ai:2181 --topic texts
+    
