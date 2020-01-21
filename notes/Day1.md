@@ -477,3 +477,35 @@ Create a New Project
 Select Maven on left side
 Ensure that Project SDK is 1.8, if not set, select the JDK Path
 
+
+Replication - 3   (33.3:33.3:33.3)  == 99.9%
+How many brokers need - minimum 3 brokers
+Brokers - 4 - 3 available
+
+1 Broker fail : 
+
+Zookeeper - 3 or 5 or 7
+
+Voting Master/Leader/Replicas
+
+66:33
+
+---
+
+Replication: 3
+
+Broker 0
+    P0 - LEAD - accept all the write, ensure that other follower replicate the data
+    P1
+    P2
+Broker 1
+    P1 - LEAD
+    P2
+    P0
+Broker 2
+    P2 - LEAD
+    P0 - Follower
+    
+Broker 4 - Fails
+    P0 - Follower
+    P1 - LEAD
