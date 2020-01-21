@@ -285,3 +285,99 @@ Below can be executed from windows machine also
     
     kafka-topics --describe  --zookeeper k5.nodesense.ai:2181 --topic texts
     
+    
+# AVRO
+
+JSON
+{
+"orderNo":41243243432,
+"amount":434.32,
+"customerId":42343432423,
+"date":"2020 Jan, 22, 10:00:00 AM"
+}
+
+JSON 
+    NO Schema
+    Data is represenated as String/TEXT/CHAR/Unicode
+
+Total CHARs are 102 x 2 = 204 bytes per record
+Char is unicode - 2 bytes 
+-----
+
+
+Producer Transfer 204 bytes to Broker
+Broker stores 204 bytes in HDD
+Update REplicas with 204
+Consumer, read 204 bytes
+
+
+
+AVRO
+
+    Data serialization system 
+    serialization and deserialization of the data
+    Schema
+    Encoding in Binary format
+
+{
+"orderNo": int , 4 bytes
+"amount": float , 4 bytes
+"customerId": int , 4 bytes
+"date": int8 - 8 bytes
+} = Total Bytes = 20 bytes
+
+{
+ 41243243432 [index 0]
+ 434.32 [index 1]
+ 42343432423, [index 2]
+ 1579603677153 [index 3]
+} == 20 bytes
+
+
+Producer Transfer 20 bytes to Broker
+    serialization will be super fast compared to JSON
+Broker stores 20 bytes in HDD
+Update REplicas with 20
+Consumer, read 20 bytes
+        convert to object will be  super fast than JSON
+
+
+Storage Cost
+Retrival/Storage time with HDD /SSD/HDD/SAS/NAS.. - latency
+NEtwork - Brokers replicas, producer/consumers
+Schema - Data Format/Validation
+
+
+
+Apache NIFI / Embed the schema inside message
+    {{
+        schema as whole
+    }}
+    {{data}}
+
+Apache Kafka / Doesn't embed schema, instead include schema version number
+    {{schema-version}} - 4 bytes number
+    {{data}}
+
+Where is schema stored?
+    Schema registry tool - to store the schemas with version
+    
+KAFKA for batch? Why?
+   Data Pipeline, persisted messages/streams
+   
+   Whenever data changed,
+   Pull data from SQL DB/CSV/FTP/other sources
+   store into Redis/Mem Cached
+   store the changed data into Elastics search
+   Store the data into Hadoop
+   
+   
+   
+ Downlaod  and store into lib folder of project
+   http://apachemirror.wuchna.com/avro/stable/java/avro-1.9.1.jar
+   
+   http://apachemirror.wuchna.com/avro/stable/java/avro-tools-1.9.1.jar
+   
+ Command to generate POJO class from the schema
+ 
+ java -jar ./lib/avro-tools-1.9.1.jar compile schema ./src/main/resources/avro/invoice.avsc ./src/main/java

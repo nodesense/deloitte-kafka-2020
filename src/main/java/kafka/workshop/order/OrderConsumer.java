@@ -1,5 +1,6 @@
 package kafka.workshop.order;
 
+import kafka.workshop.models.Invoice;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -42,6 +43,7 @@ public class OrderConsumer {
         consumer.subscribe(singletonList(TOPIC));
 
         System.out.println("Consumer Starting!");
+
 
         while (true) {
             // poll (timeout value), wait for 1 second, get all the messages
