@@ -56,7 +56,7 @@ public class InvoiceProducer {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        long events = 1;
+        long events = 100000;
 
 
         Properties props = new Properties();
@@ -92,7 +92,7 @@ public class InvoiceProducer {
             producer.send(record).get(); // get() sync wait
 
             System.out.println("Sent Invoice" + invoice);
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }
 
     }
