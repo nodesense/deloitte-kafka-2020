@@ -5,13 +5,12 @@
  */
 package kafka.workshop.models;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
+@SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Invoice extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = -385620332606607685L;
@@ -27,16 +26,7 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       new BinaryMessageDecoder<Invoice>(MODEL$, SCHEMA$);
 
   /**
-   * Return the BinaryMessageEncoder instance used by this class.
-   * @return the message encoder used by this class
-   */
-  public static BinaryMessageEncoder<Invoice> getEncoder() {
-    return ENCODER;
-  }
-
-  /**
    * Return the BinaryMessageDecoder instance used by this class.
-   * @return the message decoder used by this class
    */
   public static BinaryMessageDecoder<Invoice> getDecoder() {
     return DECODER;
@@ -45,39 +35,29 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
-   * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<Invoice> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<Invoice>(MODEL$, SCHEMA$, resolver);
   }
 
-  /**
-   * Serializes this Invoice to a ByteBuffer.
-   * @return a buffer holding the serialized data for this instance
-   * @throws java.io.IOException if this instance could not be serialized
-   */
+  /** Serializes this Invoice to a ByteBuffer. */
   public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
     return ENCODER.encode(this);
   }
 
-  /**
-   * Deserializes a Invoice from a ByteBuffer.
-   * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a Invoice instance decoded from the given buffer
-   * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
-   */
+  /** Deserializes a Invoice from a ByteBuffer. */
   public static Invoice fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
-   private java.lang.CharSequence id;
-   private int qty;
-   private int amount;
-   private java.lang.CharSequence customerId;
-   private java.lang.CharSequence state;
-   private java.lang.CharSequence country;
-   private long invoiceDate;
+  @Deprecated public java.lang.CharSequence id;
+  @Deprecated public int qty;
+  @Deprecated public int amount;
+  @Deprecated public java.lang.CharSequence customerId;
+  @Deprecated public java.lang.CharSequence state;
+  @Deprecated public java.lang.CharSequence country;
+  @Deprecated public long invoiceDate;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -106,7 +86,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     this.invoiceDate = invoiceDate;
   }
 
-  public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
@@ -145,7 +124,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     return id;
   }
 
-
   /**
    * Sets the value of the 'id' field.
    * @param value the value to set.
@@ -158,16 +136,15 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'qty' field.
    * @return The value of the 'qty' field.
    */
-  public int getQty() {
+  public java.lang.Integer getQty() {
     return qty;
   }
-
 
   /**
    * Sets the value of the 'qty' field.
    * @param value the value to set.
    */
-  public void setQty(int value) {
+  public void setQty(java.lang.Integer value) {
     this.qty = value;
   }
 
@@ -175,16 +152,15 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'amount' field.
    * @return The value of the 'amount' field.
    */
-  public int getAmount() {
+  public java.lang.Integer getAmount() {
     return amount;
   }
-
 
   /**
    * Sets the value of the 'amount' field.
    * @param value the value to set.
    */
-  public void setAmount(int value) {
+  public void setAmount(java.lang.Integer value) {
     this.amount = value;
   }
 
@@ -195,7 +171,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
   public java.lang.CharSequence getCustomerId() {
     return customerId;
   }
-
 
   /**
    * Sets the value of the 'customerId' field.
@@ -213,7 +188,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     return state;
   }
 
-
   /**
    * Sets the value of the 'state' field.
    * @param value the value to set.
@@ -230,7 +204,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     return country;
   }
 
-
   /**
    * Sets the value of the 'country' field.
    * @param value the value to set.
@@ -243,16 +216,15 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'invoiceDate' field.
    * @return The value of the 'invoiceDate' field.
    */
-  public long getInvoiceDate() {
+  public java.lang.Long getInvoiceDate() {
     return invoiceDate;
   }
-
 
   /**
    * Sets the value of the 'invoiceDate' field.
    * @param value the value to set.
    */
-  public void setInvoiceDate(long value) {
+  public void setInvoiceDate(java.lang.Long value) {
     this.invoiceDate = value;
   }
 
@@ -270,11 +242,7 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
    * @return A new Invoice RecordBuilder
    */
   public static kafka.workshop.models.Invoice.Builder newBuilder(kafka.workshop.models.Invoice.Builder other) {
-    if (other == null) {
-      return new kafka.workshop.models.Invoice.Builder();
-    } else {
-      return new kafka.workshop.models.Invoice.Builder(other);
-    }
+    return new kafka.workshop.models.Invoice.Builder(other);
   }
 
   /**
@@ -283,11 +251,7 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
    * @return A new Invoice RecordBuilder
    */
   public static kafka.workshop.models.Invoice.Builder newBuilder(kafka.workshop.models.Invoice other) {
-    if (other == null) {
-      return new kafka.workshop.models.Invoice.Builder();
-    } else {
-      return new kafka.workshop.models.Invoice.Builder(other);
-    }
+    return new kafka.workshop.models.Invoice.Builder(other);
   }
 
   /**
@@ -317,31 +281,31 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
-        fieldSetFlags()[0] = other.fieldSetFlags()[0];
+        fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.qty)) {
         this.qty = data().deepCopy(fields()[1].schema(), other.qty);
-        fieldSetFlags()[1] = other.fieldSetFlags()[1];
+        fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.amount)) {
         this.amount = data().deepCopy(fields()[2].schema(), other.amount);
-        fieldSetFlags()[2] = other.fieldSetFlags()[2];
+        fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.customerId)) {
         this.customerId = data().deepCopy(fields()[3].schema(), other.customerId);
-        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+        fieldSetFlags()[3] = true;
       }
       if (isValidValue(fields()[4], other.state)) {
         this.state = data().deepCopy(fields()[4].schema(), other.state);
-        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+        fieldSetFlags()[4] = true;
       }
       if (isValidValue(fields()[5], other.country)) {
         this.country = data().deepCopy(fields()[5].schema(), other.country);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+        fieldSetFlags()[5] = true;
       }
       if (isValidValue(fields()[6], other.invoiceDate)) {
         this.invoiceDate = data().deepCopy(fields()[6].schema(), other.invoiceDate);
-        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -350,7 +314,7 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
      * @param other The existing instance to copy.
      */
     private Builder(kafka.workshop.models.Invoice other) {
-      super(SCHEMA$);
+            super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
@@ -389,7 +353,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       return id;
     }
 
-
     /**
       * Sets the value of the 'id' field.
       * @param value The value of 'id'.
@@ -425,10 +388,9 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'qty' field.
       * @return The value.
       */
-    public int getQty() {
+    public java.lang.Integer getQty() {
       return qty;
     }
-
 
     /**
       * Sets the value of the 'qty' field.
@@ -464,10 +426,9 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'amount' field.
       * @return The value.
       */
-    public int getAmount() {
+    public java.lang.Integer getAmount() {
       return amount;
     }
-
 
     /**
       * Sets the value of the 'amount' field.
@@ -506,7 +467,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     public java.lang.CharSequence getCustomerId() {
       return customerId;
     }
-
 
     /**
       * Sets the value of the 'customerId' field.
@@ -547,7 +507,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       return state;
     }
 
-
     /**
       * Sets the value of the 'state' field.
       * @param value The value of 'state'.
@@ -587,7 +546,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       return country;
     }
 
-
     /**
       * Sets the value of the 'country' field.
       * @param value The value of 'country'.
@@ -623,10 +581,9 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'invoiceDate' field.
       * @return The value.
       */
-    public long getInvoiceDate() {
+    public java.lang.Long getInvoiceDate() {
       return invoiceDate;
     }
-
 
     /**
       * Sets the value of the 'invoiceDate' field.
@@ -671,8 +628,6 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
         record.country = fieldSetFlags()[5] ? this.country : (java.lang.CharSequence) defaultValue(fields()[5]);
         record.invoiceDate = fieldSetFlags()[6] ? this.invoiceDate : (java.lang.Long) defaultValue(fields()[6]);
         return record;
-      } catch (org.apache.avro.AvroMissingFieldException e) {
-        throw e;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
@@ -697,91 +652,4 @@ public class Invoice extends org.apache.avro.specific.SpecificRecordBase impleme
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.id);
-
-    out.writeInt(this.qty);
-
-    out.writeInt(this.amount);
-
-    out.writeString(this.customerId);
-
-    out.writeString(this.state);
-
-    out.writeString(this.country);
-
-    out.writeLong(this.invoiceDate);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-
-      this.qty = in.readInt();
-
-      this.amount = in.readInt();
-
-      this.customerId = in.readString(this.customerId instanceof Utf8 ? (Utf8)this.customerId : null);
-
-      this.state = in.readString(this.state instanceof Utf8 ? (Utf8)this.state : null);
-
-      this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
-
-      this.invoiceDate = in.readLong();
-
-    } else {
-      for (int i = 0; i < 7; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-          break;
-
-        case 1:
-          this.qty = in.readInt();
-          break;
-
-        case 2:
-          this.amount = in.readInt();
-          break;
-
-        case 3:
-          this.customerId = in.readString(this.customerId instanceof Utf8 ? (Utf8)this.customerId : null);
-          break;
-
-        case 4:
-          this.state = in.readString(this.state instanceof Utf8 ? (Utf8)this.state : null);
-          break;
-
-        case 5:
-          this.country = in.readString(this.country instanceof Utf8 ? (Utf8)this.country : null);
-          break;
-
-        case 6:
-          this.invoiceDate = in.readLong();
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
-
-
-
-
-
-
-
-
-
-

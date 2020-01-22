@@ -11,7 +11,6 @@ package kafka.workshop.invoice;
 
     import java.util.Properties;
     import java.util.Random;
-    import java.util.concurrent.ExecutionException;
 //
 
 // kafka-topics --zookeeper k5.nodesense.ai:2181 --create --topic invoices --replication-factor 1 --partitions 3
@@ -20,7 +19,7 @@ public class InvoiceProducer {
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     // FIXME: Always check
     public static String SCHEMA_REGISTRY = "http://k5.nodesense.ai:8081"; //default
-    public static String TOPIC = "invoices";
+    public static String TOPIC = "invoices2";
 
     static Random random = new Random();
     static int[] categories = {1, 2, 3, 4};

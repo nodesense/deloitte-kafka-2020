@@ -174,9 +174,9 @@ Consumer Group
 CLUSTER SETUP
   -- 4 Brokers cluster + 1 zookeeper [for demonstration, use the same system with differnt port]
   -- Broker id 0 - Port 9092, log dir /tmp/kafka-logs
-  -- Broker id 1 - Port 9092, log dir /tmp/kafka-logs-1
-  -- Broker id 2 - Port 9093, log dir /tmp/kafka-logs-2
-  -- Broker id 3 - port 9094, log dir /tmp/kafka-logs-3
+  -- Broker id 1 - Port 9093, log dir /tmp/kafka-logs-1
+  -- Broker id 2 - Port 9094, log dir /tmp/kafka-logs-2
+  -- Broker id 3 - port 9095, log dir /tmp/kafka-logs-3
         
 %KAFKA_HOME%/etc/kafka/server.properties [COPY/PASTE this file 3 times]
 %KAFKA_HOME%/etc/kafka/server1.properties
@@ -320,6 +320,15 @@ AVRO
     Encoding in Binary format
 
 {
+"orderNo":41243243432,
+"amount":434.32,
+"customerId":42343432423,
+"date":"2020 Jan, 22, 10:00:00 AM"
+} = total bytes 204
+
+to schema 
+
+{
 "orderNo": int , 4 bytes
 "amount": float , 4 bytes
 "customerId": int , 4 bytes
@@ -346,7 +355,6 @@ Storage Cost
 Retrival/Storage time with HDD /SSD/HDD/SAS/NAS.. - latency
 NEtwork - Brokers replicas, producer/consumers
 Schema - Data Format/Validation
-
 
 
 Apache NIFI / Embed the schema inside message
@@ -378,15 +386,19 @@ KAFKA for batch? Why?
    
    
    
- Downlaod  and store into lib folder of project
-   http://apachemirror.wuchna.com/avro/stable/java/avro-1.9.1.jar
-   
-   http://apachemirror.wuchna.com/avro/stable/java/avro-tools-1.9.1.jar
+ Download  and store into lib folder of project
+ 
+ 
+wget https://repo1.maven.org/maven2/org/apache/avro/avro-tools/1.8.2/avro-tools-1.8.2.jar --no-check-certificate
+wget https://repo1.maven.org/maven2/org/apache/avro/avro/1.8.2/avro-1.8.2.jar --no-check-certificate
+
+
    
  Command to generate POJO class from the schema
  
- java -jar ./lib/avro-tools-1.9.1.jar compile schema ./src/main/resources/avro/invoice.avsc ./src/main/java
+ java -jar ./lib/avro-tools-1.8.2.jar compile schema ./src/main/resources/avro/invoice.avsc ./src/main/java
 
+ java -jar ./lib/avro-tools-1.9.1.jar compile schema ./src/main/resources/avro/invoice.avsc ./src/main/java
 
 you can add  to pom.xml
 
@@ -418,6 +430,7 @@ http://k5.nodesense.ai:8081/subjects/invoices-value/versions/1
 
     kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic invoices --from-beginning
     
+EXPLAIN 
 To view Avro Formatted data
-    kafka-avro-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic invoices --from-beginning
+    kafka-avro-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic invoices2 --from-beginning --property schema.registry.url="http://k5.nodesense.ai:8081"
 

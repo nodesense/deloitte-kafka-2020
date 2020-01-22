@@ -16,7 +16,7 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 import static java.util.Collections.singletonList;
 
 public class InvoiceConsumer {
-    public static String TOPIC = "invoices";
+    public static String TOPIC = "invoices2";
 
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     // FIXME: Always check
@@ -32,8 +32,8 @@ public class InvoiceConsumer {
         props.put(AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.put(SESSION_TIMEOUT_MS_CONFIG, "30000");
 
-        props.put(GROUP_ID_CONFIG, UUID.randomUUID().toString());
-        props.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
+        //props.put(GROUP_ID_CONFIG, UUID.randomUUID().toString());
+        // props.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
 
 
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroDeserializer");
