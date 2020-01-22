@@ -19,7 +19,7 @@ public class InvoiceProducer {
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     // FIXME: Always check
     public static String SCHEMA_REGISTRY = "http://k5.nodesense.ai:8081"; //default
-    public static String TOPIC = "invoices2";
+    public static String TOPIC = "invoices";
 
     static Random random = new Random();
     static int[] categories = {1, 2, 3, 4};
