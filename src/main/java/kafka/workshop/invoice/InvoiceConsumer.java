@@ -16,7 +16,7 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 import static java.util.Collections.singletonList;
 
 public class InvoiceConsumer {
-    public static String TOPIC = "invoices2";
+    public static String TOPIC = "invoices";
 
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     // FIXME: Always check
