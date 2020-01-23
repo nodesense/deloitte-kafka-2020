@@ -88,6 +88,31 @@ public class InvoiceStream {
         KTable<String, Long> stateGroupCount = stateGroupStream
                 .count(); // numebr of orders by state
 
+                 // Set key to title and value to ticket value
+        invoiceStream
+                .map((k, v) -> new KeyValue<>(v.getState().toString(), (long) v.getAmount()))
+                // Group by title
+                .groupByKey(Grouped.with(Serdes.String(), Serdes.Long()))
+                // Apply SUM aggregation
+                .reduce(Long::sum)
+                // Write to stream specified by outputTopic
+                .toStream().to("statewise-amount", Produced.with(Serdes.String(), Serdes.Long()));
+
+
+        /// filter
+        KStream<String, Invoice> invoiceQtyGt3Stream = invoiceStream
+                .filter((key, invoice) ->  invoice.getQty() > 3);
+
+        invoiceQtyGt3Stream.foreach(new ForeachAction<String, Invoice>() {
+            @Override
+            public void apply(String key, Invoice invoice) {
+                System.out.println("Invoice Key " + key + "  value id  " + invoice.getId() + ":" + invoice.getAmount() );
+                System.out.println("received invoice " + invoice);
+            }
+        });
+
+
+
         final Serde<String> stringSerde = Serdes.String();
         final Serde<Long> longSerde = Serdes.Long();
         final Serde<Double> doubleSerde = Serdes.Double();
