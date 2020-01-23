@@ -23,6 +23,16 @@ kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic words-cou
 Run the WordStrema Java application
 
 
+---
+Invoices Stream
+
+Run the Invoice Producer
+
+Run the InvoiceStream application
+
+Run the consume consumer
+
+kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic statewise-invoices-count --from-beginning --property print.key=true  --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
 
 
 
