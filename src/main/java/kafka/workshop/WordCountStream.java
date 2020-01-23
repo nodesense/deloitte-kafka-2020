@@ -4,17 +4,24 @@ package kafka.workshop;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.*;
 import org.apache.kafka.streams.kstream.ForeachAction;
 import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.Produced;
 
+import java.time.Duration;
 import java.util.*;
 
 // kafka-topics --zookeeper localhost:2181 --create --topic words --replication-factor 3 --partitions 3
 //// kafka-topics --zookeeper localhost:2181 --create --topic words-count-output --replication-factor 3 --partitions 3
+
+
+
+// kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic words-count-output --from-beginning --property print.key=true  --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+
+
+   //     kafka-console-consumer --bootstrap-server k5.nodesense.ai:9092 --topic words-count-windowed-output --from-beginning --property print.key=true  --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+
 
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import org.apache.kafka.common.serialization.Serde;
@@ -26,6 +33,7 @@ import org.apache.kafka.streams.kstream.*;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class WordCountStream {
 
@@ -99,6 +107,52 @@ public class WordCountStream {
 
 
         KStream<String, Long> wordCountStream = wordCount.toStream();
+
+
+
+          splitWords
+                .groupBy((_$, word) -> word)
+                .windowedBy(TimeWindows.of(Duration.ofSeconds(120)))
+                .count()
+                .toStream()
+                .foreach((windowedWord, count) -> {
+                        System.out.println("Starting " + windowedWord.window().start());
+                        System.out.println("End " + windowedWord.window().end());
+                        System.out.println("Windows word is " + windowedWord.key() + " Count is " + count);
+                });
+
+
+        //  .windowedBy( SessionWindows.with(TimeUnit.MINUTES.toMillis(5)))) /* session window */
+        // TimeWindows.of()  tumbling windows
+
+        /* Hopping Window
+        long windowSizeMs = TimeUnit.MINUTES.toMillis(5); // 5 * 60 * 1000L
+
+        long advanceMs =    TimeUnit.MINUTES.toMillis(1); // 1 * 60 * 1000L
+        .windowedBy( TimeWindows.of(windowSizeMs).advanceBy(advanceMs))
+        */
+
+        splitWords
+                .groupBy((_$, word) -> word)
+                .windowedBy(TimeWindows.of(Duration.ofSeconds(120)))
+                .count()
+                .toStream()
+                // Convert Windows<String> to <Stirng, Value>
+                .map( (windowedKey, value) -> new KeyValue<>(windowedKey.key(), value) )
+                .foreach((word, count) -> {
+                    System.out.println("Windows word is " + word + " Count is " + count);
+                });
+
+        KStream<String, Long> windowed = splitWords
+                .groupBy((_$, word) -> word)
+                 .windowedBy(TimeWindows.of(Duration.ofSeconds(120)))
+                .count()
+                .toStream()
+                .map( (key, value) -> new KeyValue<>(key.key(), value) );
+
+
+        windowed.to("words-count-windowed-output", Produced.with(stringSerde, longSerde));
+
 
 
         wordCountStream.foreach(new ForeachAction<String, Long>() {

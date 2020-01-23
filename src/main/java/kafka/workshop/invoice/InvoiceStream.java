@@ -98,7 +98,6 @@ public class InvoiceStream {
                 // Write to stream specified by outputTopic
                 .toStream().to("statewise-amount", Produced.with(Serdes.String(), Serdes.Long()));
 
-
         /// filter
         KStream<String, Invoice> invoiceQtyGt3Stream = invoiceStream
                 .filter((key, invoice) ->  invoice.getQty() > 3);
@@ -111,6 +110,8 @@ public class InvoiceStream {
             }
         });
 
+        // KTable can't be stored
+        // Convert KTable to KStream and then write to Kafka topic using .to("topicname")
 
 
         final Serde<String> stringSerde = Serdes.String();
