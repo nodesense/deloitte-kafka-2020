@@ -169,6 +169,10 @@ value.converter=org.apache.kafka.connect.storage.StringConverter
 
 -----
 
+
+
+
+
 kafka-consumer-groups --bootstrap-server k5.nodesense.ai:9092 --list
 
 kafka-consumer-groups --bootstrap-server k5.nodesense.ai:9092 --describe --group invoice-consumer-example
@@ -191,5 +195,3 @@ to reset offsets of a consumer group to the latest offset
 
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --reset-offsets --group consumergroup1 --topic topic1 --to-latest
 
-
-2:00 PM
