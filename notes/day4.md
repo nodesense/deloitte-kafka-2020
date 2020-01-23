@@ -195,3 +195,19 @@ to reset offsets of a consumer group to the latest offset
 
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --reset-offsets --group consumergroup1 --topic topic1 --to-latest
 
+
+Alter paritions
+
+kafka-topics --zookeeper k5.nodesense.ai:2181 --describe --topic greetings  
+kafka-topics --zookeeper k5.nodesense.ai:2181 --alter --topic greetings  --partitions 4 
+
+
+4:10 PM
+
+Control Center -    
+        Monitoring
+        Connect
+        KSQL
+        Alerts
+        Triggers
+        

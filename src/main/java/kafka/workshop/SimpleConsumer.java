@@ -18,7 +18,7 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class SimpleConsumer {
     public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
-    public static String TOPIC = "texts";
+    public static String TOPIC = "greetings";
 
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
