@@ -1,0 +1,36 @@
+{
+ "namespace": "ai.nodesense.streams.models",
+ "type": "record",
+ "name": "DataValueEvent",
+ "fields": [
+     {"name": "device_id", "type": "string"},
+     {"name": "name",  "type": "string"},
+     {"name": "value", "type":["null","double"],"default":"null"},
+     {"name":"str_value","type":["null","string"],"default":"null"},
+     {"name":"json_value","type":["null","string"],"default":"null"},
+     {"name": "unit",  "type":["null","string"],"default":"null"},
+     {"name": "quality",  "type":  "long","default":0},
+     {"name": "status",  "type":  "long","default":0},
+     {"name": "timestamp", "type":  "long" , "logicalType": "timestamp-millis"},
+     {"name":"tag","type":["null","string"],"default":"null"},
+     {"name":"station0","type":["null","string"],"default":"null"},
+     {"name":"station1","type":["null","string"],"default":"null"},
+     {"name":"station2","type":["null","string"],"default":"null"},
+     {"name":"source","type":["null","string"],"default":"null"},
+     {"name":"m0","type":["null","string"],"default":"null"},
+     {"name":"m1","type":["null","string"],"default":"null"},
+     {"name":"m2","type":["null","string"],"default":"null"},
+     {"name":"m3","type":["null","string"],"default":"null"},
+     {"name":"tag_type","type":["null","string"],"default":"null"},
+     {"name":"variable_type","type":["null","string"],"default":"null"},
+     {"name":"device_type","type":["null","string"],"default":"null"},
+     {"name":"project","type":["null","string"],"default":"null"},
+      {"name":"region0","type":["null","string"],"default":"null"},
+      {"name":"region1","type":["null","string"],"default":"null"},
+      {"name":"region2","type":["null","string"],"default":"null"},
+      {"name":"region3","type":["null","string"],"default":"null"},
+      {"name":"region4","type":["null","string"],"default":"null"},
+      {"name":"region5","type":["null","string"],"default":"null"}
+
+ ]
+}

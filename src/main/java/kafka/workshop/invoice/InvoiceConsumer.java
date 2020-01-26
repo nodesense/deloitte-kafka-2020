@@ -9,7 +9,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 
 import java.util.Properties;
-import java.util.UUID;
 
 import static java.time.Duration.ofSeconds;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;

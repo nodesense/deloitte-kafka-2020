@@ -83,6 +83,7 @@ public class SimpleConsumer {
                 // manual commit if ENABLE_AUTO_COMMIT_CONFIG is "false"
                 // technically consumer send a message to broker about commited offset against consumer group
                 consumer.commitSync();
+                Thread.sleep(3000);
             }
 
             // Thread.sleep(2000);

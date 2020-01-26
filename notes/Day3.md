@@ -300,7 +300,7 @@ nano  mysql-product-source.json
  http://k5.nodesense.ai:8081/subjects/db_products-value/versions/1
  
   
-  java -jar ./lib/avro-tools-1.9.1.jar compile schema ./src/main/resources/avro/product.avsc ./src/main/java
+  java -jar ./lib/avro-tools-1.8.2.jar compile schema ./src/main/resources/avro/product.avsc ./src/main/java
 
 ## MYSQL SINK Connectors
   Consume from Topics, write to database

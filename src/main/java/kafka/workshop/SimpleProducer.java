@@ -186,7 +186,7 @@ public class SimpleProducer {
 
 
         int counter = 0;
-        for (int i = 0 ; i < 100; i++) {
+        for (int i = 0 ; i < 1000; i++) {
             for (String message:greetingMessages) {
                 // producer record, topic, key (null), value (message)
                 // send message, not waiting for ack
@@ -199,7 +199,7 @@ public class SimpleProducer {
                 System.out.printf("Greeting %d - %s sent\n", counter, message);
                 System.out.println("Ack offset " + metadata.offset() + " partition " + metadata.partition());
 
-                Thread.sleep(5000); // Demo only,
+                Thread.sleep(100); // Demo only,
                 counter++;
             }
         }

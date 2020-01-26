@@ -16,9 +16,9 @@ package kafka.workshop.invoice;
 // kafka-topics --zookeeper k5.nodesense.ai:2181 --create --topic invoices --replication-factor 1 --partitions 3
 
 public class InvoiceProducer {
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
+    public static String BOOTSTRAP_SERVERS = "localhost:9092";
     // FIXME: Always check
-    public static String SCHEMA_REGISTRY = "http://k5.nodesense.ai:8081"; //default
+    public static String SCHEMA_REGISTRY = "http://localhost:8081"; //default
     public static String TOPIC = "invoices";
 
     static Random random = new Random();
