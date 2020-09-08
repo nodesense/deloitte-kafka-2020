@@ -23,13 +23,11 @@ import static java.util.Collections.singletonList;
 // Auto commit disabled
 public class RebalanceConsumer {
 
-    public static String BOOTSTRAP_SERVERS = "localhost:9092";
     public static String TOPIC = "texts";
 
     public static void main(String[] args) {
-
         Properties props = new Properties();
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
         props.put(GROUP_ID_CONFIG, "rebalance-consumer"); // offset, etc, TODO
         props.put(ENABLE_AUTO_COMMIT_CONFIG, "false");
         props.put(AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");

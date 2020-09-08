@@ -18,7 +18,6 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 public class SimpleProducer {
 
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     public static String TOPIC = "greetings";
 
 
@@ -156,7 +155,7 @@ public class SimpleProducer {
     public static void main(String[] args) throws  Exception {
         Properties props = new Properties();
 
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS); // broker address
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS); // broker address
 
         props.put(ACKS_CONFIG, "all"); // acknowledge level "0", "1", "all"
 

@@ -1,5 +1,6 @@
 package kafka.workshop.invoice;
 
+import kafka.workshop.Settings;
 import kafka.workshop.models.Invoice;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.specific.SpecificData;
@@ -17,15 +18,11 @@ import static java.util.Collections.singletonList;
 public class InvoiceConsumer {
     public static String TOPIC = "invoices";
 
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
-    // FIXME: Always check
-    public static String SCHEMA_REGISTRY = "http://k5.nodesense.ai:8081"; //default
-
     public static void main(String[] args) {
 
 
         Properties props = new Properties();
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
         props.put(GROUP_ID_CONFIG, "invoice-consumer-example"); // offset, etc, TODO
         props.put(ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.put(AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
@@ -37,7 +34,7 @@ public class InvoiceConsumer {
 
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroDeserializer");
         props.put(VALUE_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.KafkaAvroDeserializer");
-        props.put("schema.registry.url", SCHEMA_REGISTRY);
+        props.put("schema.registry.url", Settings.SCHEMA_REGISTRY);
 
         // <Key as string, Value as string>
         KafkaConsumer<String, Invoice> consumer = new KafkaConsumer<>(props);

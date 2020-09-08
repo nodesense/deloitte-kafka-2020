@@ -1,5 +1,6 @@
 package kafka.workshop.order;
 
+import kafka.workshop.Settings;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -16,14 +17,13 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class OrderConsumer {
 
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     public static String TOPIC = "orders";
 
 
     public static void main(String[] args) {
 
         Properties props = new Properties();
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
 
         props.put(GROUP_ID_CONFIG, "order-consumer-group"); // offset, etc, TODO
 

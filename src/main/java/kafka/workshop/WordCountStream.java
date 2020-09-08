@@ -38,13 +38,12 @@ import java.util.concurrent.TimeUnit;
 public class WordCountStream {
 
     public static Properties getConfiguration() {
-        final String bootstrapServers = "k5.nodesense.ai:9092";
-        String schemaUrl = "http://k5.nodesense.ai:8081";
+
 
         final Properties props = new Properties();
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "word-count2-stream");
         props.put(StreamsConfig.CLIENT_ID_CONFIG, "word-count2-stream-client");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
 
@@ -53,7 +52,7 @@ public class WordCountStream {
         props.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
 
 
-        props.put("schema.registry.url", schemaUrl);
+        props.put("schema.registry.url", Settings.SCHEMA_REGISTRY);
         return props;
     }
 

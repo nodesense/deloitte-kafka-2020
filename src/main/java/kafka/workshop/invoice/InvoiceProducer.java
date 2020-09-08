@@ -1,6 +1,7 @@
 package kafka.workshop.invoice;
 
 
+    import kafka.workshop.Settings;
     import kafka.workshop.models.Invoice;
     import org.apache.kafka.clients.producer.KafkaProducer;
     import org.apache.kafka.clients.producer.Producer;
@@ -16,9 +17,7 @@ package kafka.workshop.invoice;
 // kafka-topics --zookeeper k5.nodesense.ai:2181 --create --topic invoices --replication-factor 1 --partitions 3
 
 public class InvoiceProducer {
-    public static String BOOTSTRAP_SERVERS = "localhost:9092";
-    // FIXME: Always check
-    public static String SCHEMA_REGISTRY = "http://localhost:8081"; //default
+
     public static String TOPIC = "invoices";
 
     static Random random = new Random();
@@ -61,7 +60,7 @@ public class InvoiceProducer {
 
         Properties props = new Properties();
         // hardcoding the Kafka server URI for this example
-        props.put("bootstrap.servers", BOOTSTRAP_SERVERS);
+        props.put("bootstrap.servers", Settings.BOOTSTRAP_SERVERS);
         props.put("acks", "all");
         props.put("retries", 0);
 
@@ -74,7 +73,7 @@ public class InvoiceProducer {
         // Very first, The producer automatically register the avro schema with Schema Registry
         // what is the schema name?
         // <<topicname>>-value, <<topicname>>-key
-        props.put("schema.registry.url", SCHEMA_REGISTRY);
+        props.put("schema.registry.url", Settings.SCHEMA_REGISTRY);
 
         Producer<String, Invoice> producer = new KafkaProducer<String, Invoice>(props);
 

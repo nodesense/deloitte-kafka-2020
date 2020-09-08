@@ -20,13 +20,10 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG;
 
 public class ExampleSerializer {
-    public static String SCHEMA_REGISTRY = "http://192.168.0.133:8081"; //default
     public static String TOPIC = "data-value-events";
-    public static String BOOTSTRAP_SERVERS = "192.168.0.133:9092";
-
     public static void main(String args[]) throws  Exception {
         Properties props = new Properties();
-        props.put("schema.registry.url", SCHEMA_REGISTRY);
+        props.put("schema.registry.url", Settings.SCHEMA_REGISTRY);
 
         KafkaAvroSerializer avroSerializer = new KafkaAvroSerializer();
 
@@ -73,7 +70,7 @@ public class ExampleSerializer {
 
         Properties props2 = new Properties();
 
-        props2.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS); // broker address
+        props2.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS); // broker address
 
         props2.put(ACKS_CONFIG, "0"); // acknowledge level "0", "1", "all"
 
@@ -87,7 +84,7 @@ public class ExampleSerializer {
 
         // Reserved memory, pre-alloted in bytes
         props2.put(BUFFER_MEMORY_CONFIG, 33554432);
-        props2.put("schema.registry.url", SCHEMA_REGISTRY);
+        props2.put("schema.registry.url", Settings.SCHEMA_REGISTRY);
 
         // Key/Value
         // Key is string, converted to byte array [serialized data]

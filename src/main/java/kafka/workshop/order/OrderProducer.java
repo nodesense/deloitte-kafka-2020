@@ -1,6 +1,7 @@
 package kafka.workshop.order;
 
 
+import kafka.workshop.Settings;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -16,8 +17,7 @@ import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_
 
 public class OrderProducer {
 
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
-    public static String TOPIC = "orders";
+     public static String TOPIC = "orders";
 
     public static String countries[] = new String[] {"IN", "USA", "EU", "AU", "DE"};
 
@@ -38,7 +38,7 @@ public class OrderProducer {
 
         Properties props = new Properties();
 
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
         props.put(ACKS_CONFIG, "all");
         props.put(RETRIES_CONFIG, 0);
         props.put(BATCH_SIZE_CONFIG, 16000);

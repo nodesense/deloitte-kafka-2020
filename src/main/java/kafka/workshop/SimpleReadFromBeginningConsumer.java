@@ -17,13 +17,12 @@ import java.util.UUID;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class SimpleReadFromBeginningConsumer {
-    public static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
     public static String TOPIC = "texts";
 
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
 
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
 
         // -- true, automatically commit the offset, automatically
         // -- false, developers manually commit the offset

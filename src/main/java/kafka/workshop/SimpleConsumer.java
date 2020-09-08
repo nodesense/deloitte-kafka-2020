@@ -17,13 +17,12 @@ import java.util.UUID;
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class SimpleConsumer {
-    public static String BOOTSTRAP_SERVERS = "k5.nodesense.ai:9092";
     public static String TOPIC = "greetings";
 
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
 
-        props.put(BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, Settings.BOOTSTRAP_SERVERS);
 
         // Consumer group id, should be unique, partition allocated to consumers inside teh group
         props.put(GROUP_ID_CONFIG, "greetings-consumer-group"); // offset, etc, TODO
